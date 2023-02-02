@@ -29,7 +29,6 @@
     </div>
     <div id="game" hidden>
       <div id="game-header"></div>
-      <div id="game-board"></div>
       <!-- <form id="move-form">
         <label for="player-move"></label>
         <input id="move-input" type="text" />
@@ -38,11 +37,49 @@
       </form> -->
       <div class="message-display"></div>
       <div class="menu-input">
-        
-          <input class="player-text" type="text">
-          <input class="submit-button" onclick="submitClicked()" type="submit">
-        
+        <input class="player-text" type="text" />
+        <input
+          class="submit-button"
+          onclick="submitClicked()"
+          type="submit"
+          value="Zet"
+        />
       </div>
+      <style>
+        table {
+          border-collapse: collapse;
+        }
+        td {
+          width: 100px;
+          height: 100px;
+          border: 1px solid black;
+        }
+        td.white {
+          background-color: white;
+        }
+        td.black {
+          background-color: black;
+        }
+        img.checkers-piece {
+          width: 100px;
+          height: 100px;
+        }
+      </style>
+      <table>
+        <script>
+          const table = document.querySelector("table");
+          const colors = ["white", "black"];
+          for (let y = 9; y >= 0; y--) {
+            const row = document.createElement("tr");
+            for (let x = 0; x < 10; x++) {
+              const cell = document.createElement("td");
+              cell.classList.add(colors[(x + y) % 2]);
+              row.appendChild(cell);
+            }
+            table.appendChild(row);
+          }
+        </script>
+      </table>
       <div id="show-player-to-move"></div>
     </div>
     <script src="./script.js"></script>
