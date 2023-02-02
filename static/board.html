@@ -1,0 +1,36 @@
+<style>
+    table {
+      border-collapse: collapse;
+    }
+    td {
+      width: 100px;
+      height: 100px;
+      border: 1px solid black;
+    }
+    td.white {
+      background-color: white;
+    }
+    td.black {
+      background-color: black;
+    }
+    img.checkers-piece {
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+  
+  <table>
+    <script>
+      const table = document.querySelector("table");
+      const colors = ["white", "black"];
+      for (let y = 9; y >= 0; y--) {
+        const row = document.createElement("tr");
+        for (let x = 0; x < 10; x++) {
+          const cell = document.createElement("td");
+          cell.classList.add(colors[(x + y) % 2]);
+          row.appendChild(cell);
+        }
+        table.appendChild(row);
+      }
+    </script>
+  </table>

@@ -6,20 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <head>
-      <link rel="stylesheet" type="text/css" href="styles.css">
+      <link rel="stylesheet" type="text/css" href="styles.css" />
     </head>
   </head>
   <body>
     <div class="text-center">
-      <h3>Jean Houdt Van Damme!</h3>
-      <form id="form">
+      <h3 id="title-header">Jean Houdt Van Damme!</h3>
+      <form id="name-form">
         <label for="white-player">White Player</label>
         <input id="white-player" type="text" />
         <br />
         <label for="black-player">Black Player</label>
         <input id="black-player" type="text" />
         <br />
-        <button type="submit">Start spel!</button>
+        <button id="start-game" type="submit">Start spel!</button>
       </form>
       <!-- <img
         class="block"
@@ -27,10 +27,24 @@
         alt="jean-image"
       /> -->
     </div>
-    <br />
-    <ul id="players-list"></ul>
-    <section id="game-header" hidden></section>
-    <div id="game-board" hidden></div>
+    <div id="game" hidden>
+      <div id="game-header"></div>
+      <div id="game-board"></div>
+      <!-- <form id="move-form">
+        <label for="player-move"></label>
+        <input id="move-input" type="text" />
+        <br />
+        <button id="move-submit" type="submit">Zet!</button>
+      </form> -->
+      <div class="message-display"></div>
+      <div class="menu-input">
+        
+          <input class="player-text" type="text">
+          <input class="submit-button" onclick="submitClicked()" type="submit">
+        
+      </div>
+      <div id="show-player-to-move"></div>
+    </div>
     <script src="./script.js"></script>
   </body>
 </html>
