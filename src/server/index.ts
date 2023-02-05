@@ -28,26 +28,35 @@ app.post("/moves", (req, res) => {
   const { move } = req.body;
   console.log("inside moves post with move: ", move);
   if (!/^\d\d-\d\d$/.test(move)) {
-    console.log("move not valid: ", move)
+    console.log("move not valid: ", move);
+    respJsonFailed();
+  } else {
+    console.log("move valid: ", move);
+    let [from, to] = move.split("-");
+    let [x1, y1] = ensureNumber(from);
+    let [x2, y2] = ensureNumber(to);
+    if (position[x1][y1] === 0) {
+      console.log("position[x1][y1] is empty!");
+      respJsonFailed();
+      return;
+    }
+    console.log("position[x1][y1] before: ", position[x1][y1]);
+    console.log("position[x2][y2] before: ", position[x2][y2]);
+    position[x2][y2] = position[x1][y1];
+    position[x1][y1] = 0; // 0 = leeg veld
+    console.log("position[x1][y1] after: ", position[x1][y1]);
+    console.log("position[x2][y2] after: ", position[x2][y2]);
+    moves.push(move);
+    respJsonSucces();
+  }
+  function respJsonFailed() {
     res.json({
       success: false,
       nrOfMoves: moves.length,
       move: move,
     });
-  } else {
-    moves.push(move);
-    let [from, to] = move.split("-");
-    let [x1, y1] = ensureNumber(from);
-    let [x2, y2] = ensureNumber(to);
-    // for (let i = 0; i < position.length; i++) {
-    //   for (let j = 0; j < position[i].length; j++) {
-    //     position[i][j] = 0;
-    //     }
-    // }
-    console.log("move valid: ", move)
-    console.log("position[x1][y1]: ", position[x1][y1]);
-    position[x2][y2] = position[x1][y1];
-    position[x1][y1] = 0; // 0 = leeg veld
+  }
+  function respJsonSucces() {
     res.json({
       success: true,
       nrOfMoves: moves.length,

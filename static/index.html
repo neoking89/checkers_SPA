@@ -53,20 +53,37 @@
           height: 100px;
         }
       </style>
-      <table>
+      <table id="board">
         <script>
-          // fetch("http://localhost:3000/position")
-          //   .then((response) => response.json())
-          //   .then((data) => {
-          //     console.log("data: ", data);
-          //   });
           const table = document.querySelector("table");
           const colors = ["white", "black"];
-          for (let y = 9; y >= 0; y--) {
+          
+          fetch("http://localhost:3000/position").then((response) => {
+            response.json().then((data) => {
+              console.log(data);
+              // Create board and add pieces in a loop here for first time!
+            });
+          });
+
+          for (let y = 8; y > 0; y--) {
             const row = document.createElement("tr");
-            for (let x = 0; x < 10; x++) {
+            for (let x = 0; x < 8; x++) {
               const cell = document.createElement("td");
               cell.classList.add(colors[(x + y) % 2]);
+
+              // Add pieces
+              if (y <= 3) {
+                const piece = document.createElement("img");
+                piece.classList.add("checkers-piece");
+                piece.src = "./img/white_piece.png";
+                cell.appendChild(piece);
+              } else if (y >= 6) {
+                const piece = document.createElement("img");
+                piece.classList.add("checkers-piece");
+                piece.src = "./img/black_piece.png";
+                
+                cell.appendChild(piece);
+              }
               row.appendChild(cell);
             }
             table.appendChild(row);

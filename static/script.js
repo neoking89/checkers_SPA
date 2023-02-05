@@ -1,4 +1,4 @@
-import { postPlayers, postMove } from './post.js';
+import { postPlayers, postMove } from "./post.js";
 
 const nameForm = document.querySelector("#name-form");
 const moveForm = document.querySelector("#move-form");
@@ -14,7 +14,10 @@ const nameSubmit = async (event) => {
     return;
   }
 
-  const { whitePlayer: player1, blackPlayer: player2 } = await postPlayers(whitePlayer, blackPlayer);
+  const { whitePlayer: player1, blackPlayer: player2 } = await postPlayers(
+    whitePlayer,
+    blackPlayer
+  );
 
   nameForm.hidden = true;
   showGame(player1, player2);
@@ -22,15 +25,25 @@ const nameSubmit = async (event) => {
 
 const moveSubmit = async (event) => {
   event.preventDefault();
-  const move = document.querySelector('#move-input').value;
+  const move = document.querySelector("#move-input").value;
+  console.log(move);
   await postMove(move);
-  // alert(`De zet ${move} moet naar de server verstuurd worden!`);
+  //  fetch current position
+  await fetch("http://localhost:3000/position")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("data: ", data);
+      const board = document.querySelector("#board");
+      // add updated piecespositionto board here!!
+    });
 };
 
 const showGame = (whitePlayer, blackPlayer) => {
   moveForm.hidden = false;
-  document.querySelector("#title-header").innerText = `Spel tussen ${whitePlayer} en ${blackPlayer}`;
-}
+  document.querySelector(
+    "#title-header"
+  ).innerText = `Spel tussen ${whitePlayer} en ${blackPlayer}`;
+};
 
 nameForm.addEventListener("submit", nameSubmit);
 moveForm.addEventListener("submit", moveSubmit);
