@@ -5,15 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "chrome",
+            "type": "node",
             "request": "launch",
             "name": "Launch Program",
             "skipFiles": [
                 "<node_internals>/**"
             ],
             // "url": "${workspaceFolder}/static/index.html",
-            // "program": "${file}",
-            "url": "${workspaceFolder}/static/index.html",
+            "program": "${file}",
+            // "url": "${workspaceFolder}/static/index.html",
             "sourceMaps": true,
             "outFiles": [
                 "${workspaceFolder}/dist/**/*.js"

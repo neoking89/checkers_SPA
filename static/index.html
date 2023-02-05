@@ -4,47 +4,35 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <head>
-      <link rel="stylesheet" type="text/css" href="styles.css" />
-    </head>
+    <title>Checkers</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script src="./script.js" type="module"></script>
   </head>
   <body>
-    <div class="text-center">
-      <h3 id="title-header">Jean Houdt Van Damme!</h3>
-      <form id="name-form">
-        <label for="white-player">White Player</label>
-        <input id="white-player" type="text" />
-        <br />
-        <label for="black-player">Black Player</label>
-        <input id="black-player" type="text" />
-        <br />
-        <button id="start-game" type="submit">Start spel!</button>
-      </form>
-      <!-- <img
-        class="block"
-        src="./img/jean_houdt_van_damme.png"
-        alt="jean-image"
-      /> -->
-    </div>
-    <div id="game" hidden>
-      <div id="game-header"></div>
-      <!-- <form id="move-form">
-        <label for="player-move"></label>
-        <input id="move-input" type="text" />
-        <br />
-        <button id="move-submit" type="submit">Zet!</button>
-      </form> -->
-      <div class="message-display"></div>
-      <div class="menu-input">
-        <input class="player-text" type="text" />
-        <input
-          class="submit-button"
-          onclick="submitClicked()"
-          type="submit"
-          value="Zet"
-        />
-      </div>
+    <h3 id="title-header">Jean Houdt Van Damme!</h3>
+
+    <form id="name-form">
+      <label for="white-player">White Player</label>
+      <input id="white-player" type="text" />
+      <br />
+      <label for="black-player">Black Player</label>
+      <input id="black-player" type="text" />
+      <br />
+      <button id="start-game" type="submit">Start spel!</button>
+    </form>
+
+    <form id="move-form" hidden>
+      <label for="move-input">New move for ...</label>
+      <input
+        id="move-input"
+        type="text"
+        required
+        pattern="\d\d-\d\d"
+        minlength="5"
+        maxlength="5"
+      />
+      <br />
+      <button id="move-submit" type="submit">Zet!</button>
       <style>
         table {
           border-collapse: collapse;
@@ -67,6 +55,11 @@
       </style>
       <table>
         <script>
+          // fetch("http://localhost:3000/position")
+          //   .then((response) => response.json())
+          //   .then((data) => {
+          //     console.log("data: ", data);
+          //   });
           const table = document.querySelector("table");
           const colors = ["white", "black"];
           for (let y = 9; y >= 0; y--) {
@@ -80,8 +73,6 @@
           }
         </script>
       </table>
-      <div id="show-player-to-move"></div>
-    </div>
-    <script src="./script.js"></script>
+    </form>
   </body>
 </html>
